@@ -99,7 +99,24 @@ body {
 		<canvas id="canvas">
 			Your browser does not support the canvas tag.
 		</canvas>
+<script>
+    // Allow browser developer tools and right-click inspection
+    document.addEventListener("contextmenu", function(event) {
+        event.stopPropagation();
+    }, true);
 
+    document.addEventListener("mousedown", function(event) {
+        if (event.button === 2) {
+            event.stopPropagation();
+        }
+    }, true);
+
+    document.addEventListener("mouseup", function(event) {
+        if (event.button === 2) {
+            event.stopPropagation();
+        }
+    }, true);
+</script>
 		<noscript>
 			Your browser does not support JavaScript.
 		</noscript>
