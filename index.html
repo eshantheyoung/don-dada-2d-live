@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<script src="https://coi-serviceworker.github.io/coi-serviceworker/coi-serviceworker.js"></script>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 		<title>Don Dada 2D</title>
@@ -91,32 +90,15 @@ body {
 	z-index: 1;
 }
 		</style>
-		<link id="-gd-engine-icon" rel="icon" type="image/png" href="Don Dada target.png" />
-		<link rel="apple-touch-icon" href="Don Dada target.png"/>
+		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
+<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 
 	</head>
 	<body>
 		<canvas id="canvas">
 			Your browser does not support the canvas tag.
 		</canvas>
-<script>
-    // Allow browser developer tools and right-click inspection
-    document.addEventListener("contextmenu", function(event) {
-        event.stopPropagation();
-    }, true);
 
-    document.addEventListener("mousedown", function(event) {
-        if (event.button === 2) {
-            event.stopPropagation();
-        }
-    }, true);
-
-    document.addEventListener("mouseup", function(event) {
-        if (event.button === 2) {
-            event.stopPropagation();
-        }
-    }, true);
-</script>
 		<noscript>
 			Your browser does not support JavaScript.
 		</noscript>
@@ -235,3 +217,4 @@ const engine = new Engine(GODOT_CONFIG);
 		</script>
 	</body>
 </html>
+
