@@ -1,25 +1,30 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="theme-color" content="#060911">
-    <meta name="description" content="Don Dada 2D - Experience intense arcade combat. Download the Windows edition and enter the fight.">
+    <meta name="theme-color" content="#080d1c">
 
     <title>Don Dada 2D | Enter the Fight</title>
 
+    <meta
+        name="description"
+        content="Enter the fight. Play Don Dada 2D, challenge enemies, set records and compete on the global leaderboard."
+    />
+
     <style>
         :root {
-            --bg: #060911;
-            --panel: #0d1422;
-            --panel-light: #121d30;
-            --blue: #3488ff;
-            --blue-light: #65a7ff;
+            --background: #080d1c;
+            --panel: #101a30;
+            --panel-light: #172440;
+            --blue: #3287ff;
+            --blue-light: #63a8ff;
             --text: #f4f7ff;
-            --muted: #8996aa;
-            --border: rgba(255,255,255,0.08);
-            --green: #42d69b;
+            --muted: #9baac4;
+            --gold: #ffd166;
+            --border: rgba(255,255,255,0.09);
+            --green: #43d69b;
         }
 
         * {
@@ -28,13 +33,22 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 50% 0%, rgba(37,104,210,0.16), transparent 35%),
-                var(--bg);
-            color: var(--text);
             min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(35, 91, 180, 0.22),
+                    transparent 42%
+                ),
+                var(--background);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
         }
 
         a {
@@ -42,105 +56,106 @@
             text-decoration: none;
         }
 
+        button {
+            font: inherit;
+        }
+
         .container {
-            width: min(1100px, 92%);
+            width: min(1100px, calc(100% - 40px));
             margin: auto;
         }
 
-        header {
-            padding: 24px 0;
+        /* NAVIGATION */
+
+        nav {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             border-bottom: 1px solid var(--border);
         }
 
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         .logo {
-            font-size: 21px;
+            font-size: 23px;
             font-weight: 900;
             letter-spacing: 2px;
         }
 
         .logo span {
-            color: var(--blue);
+            color: var(--blue-light);
         }
 
-        .nav-label {
+        .nav-links {
+            display: flex;
+            gap: 28px;
             color: var(--muted);
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 14px;
         }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* HERO */
 
         .hero {
+            min-height: 510px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 100px 15px 75px;
+            padding: 90px 15px;
         }
 
         .eyebrow {
             color: var(--blue-light);
             font-size: 12px;
-            letter-spacing: 4px;
             font-weight: bold;
-            margin-bottom: 20px;
+            letter-spacing: 4px;
+            margin-bottom: 18px;
         }
 
-        h1 {
-            font-size: clamp(48px, 9vw, 100px);
-            line-height: 0.95;
+        .hero h1 {
+            font-size: clamp(48px, 9vw, 92px);
+            line-height: 1;
             font-weight: 1000;
-            letter-spacing: -5px;
+            letter-spacing: -4px;
+            text-transform: uppercase;
+            text-shadow: 0 8px 35px rgba(0,0,0,0.5);
         }
 
-        h1 span {
+        .hero h1 span {
             color: var(--blue);
         }
 
         .hero-description {
+            max-width: 590px;
             color: var(--muted);
-            max-width: 560px;
-            margin: 25px auto 30px;
-            line-height: 1.7;
-            font-size: 15px;
+            margin-top: 25px;
+            font-size: 17px;
         }
 
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            padding: 9px 14px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 30px;
-            color: var(--muted);
-            font-size: 11px;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-        }
-
-        .status-dot {
-            width: 7px;
-            height: 7px;
-            background: #e6a43b;
-            border-radius: 50%;
-        }
-
-        .buttons {
+        .hero-actions {
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
-            gap: 12px;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 35px;
         }
 
         .button {
-            display: inline-block;
-            padding: 15px 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 190px;
+            padding: 14px 24px;
             border-radius: 7px;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 14px;
             transition: 0.2s;
+            border: 1px solid transparent;
+            cursor: pointer;
         }
 
         .button-primary {
@@ -149,22 +164,36 @@
         }
 
         .button-primary:hover {
-            background: #176de5;
+            background: #176bdc;
             transform: translateY(-2px);
         }
 
         .button-secondary {
-            background: var(--panel-light);
-            border: 1px solid var(--border);
-            color: var(--text);
+            background: rgba(255,255,255,0.04);
+            border-color: var(--border);
+            color: white;
         }
 
         .button-secondary:hover {
-            background: #1a2941;
+            background: rgba(255,255,255,0.1);
         }
 
-        .section {
-            padding: 35px 0 75px;
+        .offline-notice {
+            margin-top: 30px;
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .offline-notice span {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* GENERAL SECTIONS */
+
+        section {
+            padding: 55px 0;
         }
 
         .section-heading {
@@ -173,65 +202,97 @@
         }
 
         .section-heading h2 {
-            font-size: 29px;
-            margin-bottom: 9px;
+            font-size: 30px;
+            letter-spacing: 1px;
         }
 
         .section-heading p {
             color: var(--muted);
+            font-size: 14px;
+            margin-top: 7px;
+        }
+
+        /* GAME INFORMATION */
+
+        .game-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .info-card {
+            padding: 25px;
+            border: 1px solid var(--border);
+            background: var(--panel);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .info-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .info-card p {
+            color: var(--muted);
             font-size: 13px;
         }
 
-        .leaderboard {
+        /* LEADERBOARD */
+
+        .leaderboard-section {
+            padding-top: 80px;
+        }
+
+        .leaderboard-container {
             max-width: 850px;
             margin: auto;
             background: var(--panel);
             border: 1px solid var(--border);
-            border-radius: 13px;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
         }
 
-        .leaderboard-header {
+        .leaderboard-top {
+            padding: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 15px;
-            padding: 20px;
             border-bottom: 1px solid var(--border);
-            flex-wrap: wrap;
         }
 
-        .leaderboard-title {
-            font-size: 16px;
-            font-weight: bold;
+        .leaderboard-top h3 {
+            font-size: 19px;
         }
 
-        .refresh-button {
-            border: 1px solid var(--border);
-            background: var(--panel-light);
-            color: var(--text);
-            padding: 9px 13px;
-            border-radius: 6px;
-            cursor: pointer;
+        .live-status {
+            color: var(--green);
             font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        .refresh-button:hover {
-            border-color: var(--blue);
+        .leaderboard-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--border);
         }
 
         .tabs {
             display: flex;
             gap: 8px;
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--border);
         }
 
         .tab {
+            border: 1px solid var(--border);
             background: transparent;
             color: var(--muted);
-            border: 1px solid transparent;
-            padding: 10px 14px;
+            padding: 10px 15px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 12px;
@@ -239,131 +300,218 @@
         }
 
         .tab.active {
-            background: rgba(52,136,255,0.12);
-            border-color: rgba(52,136,255,0.3);
-            color: var(--blue-light);
+            background: var(--blue);
+            border-color: var(--blue);
+            color: white;
+        }
+
+        .refresh-button {
+            border: 1px solid var(--border);
+            background: var(--panel-light);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .refresh-button:hover {
+            background: #22385e;
+        }
+
+        .refresh-button:disabled {
+            opacity: 0.5;
+            cursor: wait;
         }
 
         .table-wrapper {
             overflow-x: auto;
         }
 
-        table {
+        .leaderboard-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 450px;
+            min-width: 470px;
         }
 
-        th {
+        .leaderboard-table th {
+            padding: 15px 18px;
             color: var(--muted);
-            font-size: 10px;
-            text-transform: uppercase;
+            font-size: 11px;
             letter-spacing: 1px;
             text-align: left;
-            padding: 15px 20px;
-            background: rgba(255,255,255,0.015);
-        }
-
-        td {
-            padding: 17px 20px;
-            border-top: 1px solid var(--border);
-            font-size: 13px;
-        }
-
-        tr:hover td {
             background: rgba(255,255,255,0.025);
         }
 
-        .rank {
-            color: var(--muted);
-            font-weight: bold;
-            width: 60px;
-        }
-
-        .rank.top {
-            color: var(--blue-light);
-        }
-
-        .gamer {
-            font-weight: bold;
-        }
-
-        .record {
-            color: var(--blue-light);
-            font-weight: bold;
-        }
-
-        .sub-record {
-            color: var(--muted);
-            font-size: 11px;
-            margin-top: 4px;
-        }
-
-        .message {
-            text-align: center;
-            color: var(--muted);
-            padding: 35px 15px;
-            font-size: 13px;
-        }
-
-        .last-updated {
-            text-align: center;
-            color: var(--muted);
-            font-size: 10px;
-            padding: 14px;
+        .leaderboard-table td {
+            padding: 15px 18px;
             border-top: 1px solid var(--border);
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            max-width: 850px;
-            margin: 35px auto 0;
-        }
-
-        .info-card {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 22px 15px;
-            text-align: center;
-        }
-
-        .info-card h3 {
             font-size: 13px;
-            margin-bottom: 8px;
         }
 
-        .info-card p {
+        .leaderboard-table tbody tr {
+            transition: background 0.15s;
+        }
+
+        .leaderboard-table tbody tr:hover {
+            background: rgba(255,255,255,0.04);
+        }
+
+        .rank {
+            width: 65px;
+            font-weight: bold;
+            text-align: center !important;
+        }
+
+        .rank-1 {
+            color: var(--gold);
+        }
+
+        .rank-2 {
+            color: #cbd5e1;
+        }
+
+        .rank-3 {
+            color: #d99a65;
+        }
+
+        .gamer-id {
+            font-weight: bold;
+            color: white;
+        }
+
+        .score-value {
+            color: var(--blue-light);
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .my-player {
+            background: rgba(255, 209, 102, 0.09);
+        }
+
+        .empty-state {
+            padding: 40px 15px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .leaderboard-footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 15px 22px;
+            border-top: 1px solid var(--border);
             color: var(--muted);
             font-size: 11px;
-            line-height: 1.6;
         }
+
+        /* DOWNLOAD */
+
+        .download-section {
+            text-align: center;
+            padding: 75px 20px;
+            background: linear-gradient(
+                135deg,
+                rgba(31, 85, 166, 0.15),
+                rgba(8, 13, 28, 0.1)
+            );
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .download-section h2 {
+            font-size: 32px;
+        }
+
+        .download-section p {
+            color: var(--muted);
+            margin: 12px auto 25px;
+            max-width: 550px;
+            font-size: 14px;
+        }
+
+        .download-note {
+            margin-top: 15px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* FOOTER */
 
         footer {
-            border-top: 1px solid var(--border);
-            padding: 25px 0;
+            padding: 30px 15px;
             text-align: center;
             color: var(--muted);
-            font-size: 11px;
+            font-size: 12px;
         }
 
-        @media(max-width: 600px) {
+        footer strong {
+            color: white;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 650px) {
+            .container {
+                width: calc(100% - 28px);
+            }
+
+            nav {
+                height: auto;
+                min-height: 65px;
+            }
+
+            .nav-links {
+                gap: 13px;
+                font-size: 12px;
+            }
+
             .hero {
-                padding-top: 75px;
+                min-height: 440px;
+                padding: 65px 10px;
             }
 
-            h1 {
-                letter-spacing: -3px;
+            .hero h1 {
+                letter-spacing: -2px;
             }
 
-            .info-grid {
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .game-info {
                 grid-template-columns: 1fr;
             }
 
-            .leaderboard-header {
+            .leaderboard-top {
                 align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .leaderboard-controls {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .tabs {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .tab {
+                padding: 11px 7px;
+                font-size: 10px;
+            }
+
+            .leaderboard-footer {
+                flex-direction: column;
+            }
+
+            .section-heading h2 {
+                font-size: 25px;
             }
         }
     </style>
@@ -371,425 +519,700 @@
 
 <body>
 
-<header>
-    <div class="container nav">
-        <div class="logo">DON DADA <span>2D</span></div>
-        <div class="nav-label">Official Game Website</div>
-    </div>
-</header>
+    <!-- NAVIGATION -->
 
-<main>
+    <nav class="container">
+        <a href="#" class="logo">DON <span>DADA</span> 2D</a>
 
-    <section class="hero">
-        <div class="eyebrow">THE FIGHT STARTS HERE</div>
-
-        <h1>ENTER THE<br><span>FIGHT.</span></h1>
-
-        <p class="hero-description">
-            Step into Don Dada 2D. Fight your way through enemies,
-            survive increasingly difficult waves and establish
-            yourself as the ultimate fighter.
-        </p>
-
-        <div class="status">
-            <span class="status-dot"></span>
-            WEB VERSION TEMPORARILY OFFLINE
+        <div class="nav-links">
+            <a href="#about">ABOUT</a>
+            <a href="#leaderboard">LEADERBOARD</a>
+            <a href="#download">DOWNLOAD</a>
         </div>
+    </nav>
 
-        <div class="buttons">
-            <a
-                class="button button-primary"
-                href="https://github.com/eshantheyoung/don-dada-2d-live/releases/download/Don-Dada_2D_Windows/Don.Dada.2D.exe"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                DOWNLOAD WINDOWS VERSION
-            </a>
 
-            <a
-                class="button button-secondary"
-                href="https://github.com/eshantheyoung/don-dada-2d-live/releases"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                VIEW ALL RELEASES
-            </a>
-        </div>
-    </section>
+    <!-- HERO -->
 
-    <section class="section">
-        <div class="container">
+    <main>
+        <section class="hero container">
+
+            <div class="eyebrow">THE FIGHT STARTS HERE</div>
+
+            <h1>ENTER THE <span>FIGHT.</span></h1>
+
+            <p class="hero-description">
+                Fight your way through the arenas, defeat your enemies,
+                survive the waves and prove yourself on the global leaderboard.
+            </p>
+
+            <div class="hero-actions">
+
+                <a
+                    class="button button-primary"
+                    href="https://github.com/eshantheyoung/don-dada-2d-live/releases/download/Don-Dada_2D_Windows/Don.Dada.2D.exe"
+                    download
+                >
+                    DOWNLOAD FOR WINDOWS
+                </a>
+
+                <a
+                    class="button button-secondary"
+                    href="#leaderboard"
+                >
+                    VIEW LEADERBOARD
+                </a>
+
+            </div>
+
+            <div class="offline-notice">
+                WEB VERSION:
+                <span>TEMPORARILY OFFLINE</span>
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+
+        <section id="about" class="container">
 
             <div class="section-heading">
-                <h2>THE LEADERBOARD</h2>
-                <p>Every run counts. Every record matters.</p>
+                <h2>THE GAME</h2>
+                <p>Enter the arena. Fight. Survive. Set records.</p>
             </div>
 
-            <div class="leaderboard">
+            <div class="game-info">
 
-                <div class="leaderboard-header">
-                    <div class="leaderboard-title">GLOBAL RANKINGS</div>
-                    <button class="refresh-button" id="refreshButton">
-                        REFRESH
-                    </button>
-                </div>
-
-                <div class="tabs">
-                    <button class="tab active" data-board="score">
-                        HIGHEST SCORE
-                    </button>
-
-                    <button class="tab" data-board="survival">
-                        SURVIVAL RECORD
-                    </button>
-                </div>
-
-                <div class="table-wrapper">
-                    <table>
-                        <thead id="tableHead">
-                            <tr>
-                                <th>Rank</th>
-                                <th>Player</th>
-                                <th>Highest Score</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="leaderboardBody">
-                            <tr>
-                                <td colspan="3" class="message">
-                                    Loading leaderboard...
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="last-updated" id="lastUpdated">
-                    Connecting to leaderboard...
-                </div>
-
-            </div>
-
-            <div class="info-grid">
                 <div class="info-card">
-                    <h3>COMPETE</h3>
-                    <p>Challenge yourself and climb the global rankings.</p>
+                    <h3>FIGHT</h3>
+                    <p>
+                        Face enemies, master your attacks and
+                        use your abilities to defeat your opponents.
+                    </p>
                 </div>
 
                 <div class="info-card">
                     <h3>SURVIVE</h3>
-                    <p>See how long you can last against the enemy waves.</p>
+                    <p>
+                        Take on increasingly challenging waves
+                        and see how long you can last.
+                    </p>
                 </div>
 
                 <div class="info-card">
-                    <h3>MAKE HISTORY</h3>
-                    <p>Set records and leave your mark on Don Dada 2D.</p>
+                    <h3>COMPETE</h3>
+                    <p>
+                        Submit your records and compete with
+                        other players around the world.
+                    </p>
                 </div>
+
             </div>
 
-        </div>
-    </section>
+        </section>
 
-</main>
 
-<footer>
-    <div class="container">
-        Developed by Salim Eshan Isabirye © 2026
-    </div>
-</footer>
+        <!-- GLOBAL LEADERBOARD -->
 
-<script>
-    // ==================================================
-    // FIREBASE FIRESTORE REST API
-    // No Firebase SDK or separate configuration files.
-    // ==================================================
+        <section id="leaderboard" class="leaderboard-section container">
 
-    const PROJECT_ID = "dondada2d";
+            <div class="section-heading">
+                <h2>GLOBAL LEADERBOARD</h2>
+                <p>See who stands at the top of Don Dada 2D.</p>
+            </div>
 
-    const FIRESTORE_URL =
-        `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents:runQuery`;
+            <div class="leaderboard-container">
 
-    const leaderboardBody =
-        document.getElementById("leaderboardBody");
+                <div class="leaderboard-top">
 
-    const tableHead =
-        document.getElementById("tableHead");
+                    <h3 id="board-title">HIGHEST SCORE</h3>
 
-    const lastUpdated =
-        document.getElementById("lastUpdated");
+                    <div class="live-status" id="connection-status">
+                        CONNECTING...
+                    </div>
 
-    const refreshButton =
-        document.getElementById("refreshButton");
+                </div>
 
-    let currentBoard = "score";
 
-    let cachedBoards = {
-        score: [],
-        survival: []
-    };
+                <div class="leaderboard-controls">
 
-    // Convert Firestore values into JavaScript values.
-    function getField(fields, name) {
-        if (!fields || !fields[name]) return null;
+                    <div class="tabs">
 
-        const field = fields[name];
+                        <button
+                            class="tab active"
+                            id="score-tab"
+                            onclick="changeBoard('score')"
+                        >
+                            HIGHEST SCORE
+                        </button>
 
-        if (field.integerValue !== undefined) {
-            return Number(field.integerValue);
-        }
+                        <button
+                            class="tab"
+                            id="survival-tab"
+                            onclick="changeBoard('survival')"
+                        >
+                            WAVE SURVIVAL
+                        </button>
 
-        if (field.doubleValue !== undefined) {
-            return Number(field.doubleValue);
-        }
+                    </div>
 
-        if (field.stringValue !== undefined) {
-            return field.stringValue;
-        }
+                    <button
+                        class="refresh-button"
+                        id="refresh-button"
+                        onclick="loadLeaderboard()"
+                    >
+                        REFRESH
+                    </button>
 
-        return null;
-    }
+                </div>
 
-    function formatNumber(value) {
-        return Number(value || 0).toLocaleString();
-    }
 
-    function formatTime(totalSeconds) {
-        const seconds = Number(totalSeconds || 0);
+                <div class="table-wrapper">
 
-        const hours = Math.floor(seconds / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
-        const remainingSeconds = seconds % 60;
+                    <table class="leaderboard-table">
 
-        if (hours > 0) {
-            return `${hours}h ${minutes}m ${remainingSeconds}s`;
-        }
+                        <thead id="leaderboard-head">
+                            <tr>
+                                <th class="rank">RANK</th>
+                                <th>GAMER ID</th>
+                                <th style="text-align:right">SCORE</th>
+                            </tr>
+                        </thead>
 
-        if (minutes > 0) {
-            return `${minutes}m ${remainingSeconds}s`;
-        }
+                        <tbody id="leaderboard-body">
 
-        return `${remainingSeconds}s`;
-    }
+                            <tr>
+                                <td colspan="3" class="empty-state">
+                                    Loading leaderboard...
+                                </td>
+                            </tr>
 
-    async function fetchBoard(board) {
-        const orderField =
-            board === "score"
-                ? "highestScore"
-                : "longestSurvivalSeconds";
+                        </tbody>
 
-        const query = {
-            structuredQuery: {
-                from: [
-                    {
-                        collectionId: "leaderboard"
-                    }
-                ],
+                    </table>
 
-                where: {
-                    fieldFilter: {
-                        field: {
-                            fieldPath: orderField
-                        },
-                        op: "GREATER_THAN",
-                        value: {
-                            integerValue: "0"
+                </div>
+
+
+                <div class="leaderboard-footer">
+
+                    <span id="player-count">
+                        Waiting for leaderboard data...
+                    </span>
+
+                    <span>
+                        Automatically refreshes every 60 seconds
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DOWNLOAD -->
+
+        <section id="download" class="download-section">
+
+            <h2>READY TO FIGHT?</h2>
+
+            <p>
+                Download Don Dada 2D for Windows and enter the arena.
+                Your next record could put you at the top.
+            </p>
+
+            <a
+                class="button button-primary"
+                href="https://github.com/eshantheyoung/don-dada-2d-live/releases/download/Don-Dada_2D_Windows/Don.Dada.2D.exe"
+                download
+            >
+                DOWNLOAD DON DADA 2D
+            </a>
+
+            <div class="download-note">
+                Windows version
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        <p>
+            Developed by <strong>Salim Eshan Isabirye</strong>
+            &copy; 2026
+        </p>
+        <p>DON DADA 2D</p>
+    </footer>
+
+
+    <!-- FIRESTORE LEADERBOARD -->
+
+    <script>
+
+        // ==========================================
+        // FIREBASE CONFIGURATION
+        // ==========================================
+
+        const PROJECT_ID = "dondada2d";
+
+        const FIRESTORE_URL =
+            `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents:runQuery`;
+
+        const MAX_PLAYERS = 10;
+
+        let currentBoard = "score";
+        let isLoading = false;
+
+
+        // ==========================================
+        // FIRESTORE QUERY
+        // ==========================================
+
+        async function fetchLeaderboard(board) {
+
+            const field =
+                board === "survival"
+                    ? "longestSurvivalSeconds"
+                    : "highestScore";
+
+            const query = {
+
+                structuredQuery: {
+
+                    from: [
+                        {
+                            collectionId: "leaderboard"
                         }
-                    }
+                    ],
+
+                    where: {
+
+                        fieldFilter: {
+
+                            field: {
+                                fieldPath: field
+                            },
+
+                            op: "GREATER_THAN",
+
+                            value: {
+                                integerValue: "0"
+                            }
+
+                        }
+
+                    },
+
+                    orderBy: [
+
+                        {
+                            field: {
+                                fieldPath: field
+                            },
+
+                            direction: "DESCENDING"
+                        }
+
+                    ],
+
+                    limit: MAX_PLAYERS
+
+                }
+
+            };
+
+
+            const response = await fetch(FIRESTORE_URL, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
                 },
 
-                orderBy: [
-                    {
-                        field: {
-                            fieldPath: orderField
-                        },
-                        direction: "DESCENDING"
-                    }
-                ],
+                body: JSON.stringify(query)
 
-                limit: 10
+            });
+
+
+            if (!response.ok) {
+
+                const errorText = await response.text();
+
+                console.error(
+                    "Firestore error:",
+                    response.status,
+                    errorText
+                );
+
+                throw new Error(
+                    `Could not load leaderboard (${response.status}).`
+                );
+
             }
-        };
 
-        const response = await fetch(FIRESTORE_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(query)
-        });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(
-                `Firestore returned ${response.status}: ${errorText}`
-            );
+            const results = await response.json();
+
+            return results
+
+                .filter(item => item.document)
+
+                .map(item => {
+
+                    const fields = item.document.fields || {};
+
+                    return {
+
+                        gamerId:
+                            fields.gamerId?.stringValue || "Unknown",
+
+                        score:
+                            Number(fields.highestScore?.integerValue || 0),
+
+                        seconds:
+                            Number(
+                                fields.longestSurvivalSeconds?.integerValue || 0
+                            ),
+
+                        waves:
+                            Number(
+                                fields.longestSurvivalWaves?.integerValue || 0
+                            )
+
+                    };
+
+                });
+
         }
 
-        const results = await response.json();
 
-        return results
-            .filter(item => item.document)
-            .map(item => {
-                const fields = item.document.fields || {};
+        // ==========================================
+        // FORMAT SURVIVAL TIME
+        // ==========================================
 
-                return {
-                    gamerId: getField(fields, "gamerId") || "Unknown",
-                    score: getField(fields, "highestScore") || 0,
-                    survival: getField(fields, "longestSurvivalSeconds") || 0,
-                    waves: getField(fields, "longestSurvivalWaves") || 0
+        function formatTime(totalSeconds) {
+
+            const seconds = Math.max(0, totalSeconds);
+
+            const hours = Math.floor(seconds / 3600);
+
+            const minutes = Math.floor((seconds % 3600) / 60);
+
+            const remainingSeconds = seconds % 60;
+
+            return [
+                String(hours).padStart(2, "0"),
+                String(minutes).padStart(2, "0"),
+                String(remainingSeconds).padStart(2, "0")
+            ].join(":");
+
+        }
+
+
+        // ==========================================
+        // DISPLAY LEADERBOARD
+        // ==========================================
+
+        function displayLeaderboard(entries, board) {
+
+            const body =
+                document.getElementById("leaderboard-body");
+
+            const head =
+                document.getElementById("leaderboard-head");
+
+            const count =
+                document.getElementById("player-count");
+
+
+            body.innerHTML = "";
+
+
+            if (board === "survival") {
+
+                head.innerHTML = `
+                    <tr>
+                        <th class="rank">RANK</th>
+                        <th>GAMER ID</th>
+                        <th style="text-align:right">TIME</th>
+                        <th style="text-align:right">WAVES</th>
+                    </tr>
+                `;
+
+            } else {
+
+                head.innerHTML = `
+                    <tr>
+                        <th class="rank">RANK</th>
+                        <th>GAMER ID</th>
+                        <th style="text-align:right">SCORE</th>
+                    </tr>
+                `;
+
+            }
+
+
+            if (entries.length === 0) {
+
+                const row = document.createElement("tr");
+
+                const cell = document.createElement("td");
+
+                cell.colSpan = board === "survival" ? 4 : 3;
+
+                cell.className = "empty-state";
+
+                cell.textContent =
+                    "No records yet. Be the first to make history!";
+
+                row.appendChild(cell);
+
+                body.appendChild(row);
+
+                count.textContent = "0 players ranked";
+
+                return;
+
+            }
+
+
+            entries.forEach((player, index) => {
+
+                const rank = index + 1;
+
+                const row = document.createElement("tr");
+
+                const rankCell = document.createElement("td");
+
+                rankCell.className = "rank";
+
+                if (rank <= 3) {
+                    rankCell.classList.add(`rank-${rank}`);
+                }
+
+                rankCell.textContent = `#${rank}`;
+
+
+                const gamerCell = document.createElement("td");
+
+                gamerCell.className = "gamer-id";
+
+                // Use textContent rather than HTML so Gamer IDs
+                // cannot inject markup into the page.
+                gamerCell.textContent = player.gamerId;
+
+
+                row.appendChild(rankCell);
+
+                row.appendChild(gamerCell);
+
+
+                if (board === "survival") {
+
+                    const timeCell = document.createElement("td");
+
+                    timeCell.className = "score-value";
+
+                    timeCell.textContent =
+                        formatTime(player.seconds);
+
+                    row.appendChild(timeCell);
+
+
+                    const wavesCell = document.createElement("td");
+
+                    wavesCell.className = "score-value";
+
+                    wavesCell.textContent = player.waves.toLocaleString();
+
+                    row.appendChild(wavesCell);
+
+                } else {
+
+                    const scoreCell = document.createElement("td");
+
+                    scoreCell.className = "score-value";
+
+                    scoreCell.textContent =
+                        player.score.toLocaleString();
+
+                    row.appendChild(scoreCell);
+
+                }
+
+
+                body.appendChild(row);
+
+            });
+
+
+            count.textContent =
+                `Showing ${entries.length} of the top ${MAX_PLAYERS} players`;
+
+        }
+
+
+        // ==========================================
+        // LOAD LEADERBOARD
+        // ==========================================
+
+        async function loadLeaderboard() {
+
+            if (isLoading) return;
+
+            isLoading = true;
+
+            const refreshButton =
+                document.getElementById("refresh-button");
+
+            const status =
+                document.getElementById("connection-status");
+
+            refreshButton.disabled = true;
+
+            refreshButton.textContent = "LOADING...";
+
+            status.textContent = "LOADING...";
+            status.style.color = "var(--gold)";
+
+
+            try {
+
+                const entries =
+                    await fetchLeaderboard(currentBoard);
+
+                displayLeaderboard(entries, currentBoard);
+
+                status.textContent = "LIVE DATA";
+                status.style.color = "var(--green)";
+
+            } catch (error) {
+
+                console.error(error);
+
+                status.textContent = "CONNECTION ERROR";
+                status.style.color = "#ff7070";
+
+
+                const body =
+                    document.getElementById("leaderboard-body");
+
+                body.innerHTML = `
+                    <tr>
+                        <td colspan="${currentBoard === "survival" ? 4 : 3}"
+                            class="empty-state">
+                            ${escapeHTML(error.message)}
+                            <br><br>
+                            Please try refreshing.
+                        </td>
+                    </tr>
+                `;
+
+                document.getElementById("player-count").textContent =
+                    "Leaderboard unavailable";
+
+            } finally {
+
+                isLoading = false;
+
+                refreshButton.disabled = false;
+
+                refreshButton.textContent = "REFRESH";
+
+            }
+
+        }
+
+
+        // ==========================================
+        // SAFE ERROR TEXT
+        // ==========================================
+
+        function escapeHTML(value) {
+
+            return String(value).replace(/[&<>"']/g, character => {
+
+                const entities = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
                 };
-            });
-    }
 
-    function renderBoard() {
-        const entries = cachedBoards[currentBoard];
+                return entities[character];
 
-        if (currentBoard === "score") {
-            tableHead.innerHTML = `
-                <tr>
-                    <th>Rank</th>
-                    <th>Player</th>
-                    <th>Highest Score</th>
-                </tr>
-            `;
-        } else {
-            tableHead.innerHTML = `
-                <tr>
-                    <th>Rank</th>
-                    <th>Player</th>
-                    <th>Survival Record</th>
-                </tr>
-            `;
-        }
-
-        if (!entries.length) {
-            leaderboardBody.innerHTML = `
-                <tr>
-                    <td colspan="3" class="message">
-                        No records available yet. Be the first to compete.
-                    </td>
-                </tr>
-            `;
-            return;
-        }
-
-        leaderboardBody.innerHTML = entries.map((entry, index) => {
-            const rankClass = index < 3 ? "rank top" : "rank";
-
-            let recordHTML = "";
-
-            if (currentBoard === "score") {
-                recordHTML = `
-                    <span class="record">
-                        ${formatNumber(entry.score)}
-                    </span>
-                `;
-            } else {
-                recordHTML = `
-                    <span class="record">
-                        ${formatTime(entry.survival)}
-                    </span>
-                    <div class="sub-record">
-                        ${formatNumber(entry.waves)} waves survived
-                    </div>
-                `;
-            }
-
-            return `
-                <tr>
-                    <td class="${rankClass}">
-                        #${index + 1}
-                    </td>
-
-                    <td class="gamer">
-                        ${escapeHTML(entry.gamerId)}
-                    </td>
-
-                    <td>
-                        ${recordHTML}
-                    </td>
-                </tr>
-            `;
-        }).join("");
-    }
-
-    function escapeHTML(value) {
-        return String(value).replace(/[&<>"']/g, character => ({
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
-        })[character]);
-    }
-
-    async function loadLeaderboard(forceRefresh = false) {
-        refreshButton.disabled = true;
-        refreshButton.textContent = "LOADING...";
-
-        lastUpdated.textContent = "Loading leaderboard...";
-
-        try {
-            const entries = await fetchBoard(currentBoard);
-
-            cachedBoards[currentBoard] = entries;
-
-            renderBoard();
-
-            lastUpdated.textContent =
-                "Last updated: " + new Date().toLocaleTimeString();
-
-        } catch (error) {
-            console.error("Leaderboard error:", error);
-
-            leaderboardBody.innerHTML = `
-                <tr>
-                    <td colspan="3" class="message">
-                        Unable to load leaderboard. Please try again later.
-                    </td>
-                </tr>
-            `;
-
-            lastUpdated.textContent =
-                "Connection error. Check Firestore access and try again.";
-
-        } finally {
-            refreshButton.disabled = false;
-            refreshButton.textContent = "REFRESH";
-        }
-    }
-
-    document.querySelectorAll(".tab").forEach(tab => {
-        tab.addEventListener("click", () => {
-            document.querySelectorAll(".tab").forEach(item => {
-                item.classList.remove("active");
             });
 
-            tab.classList.add("active");
+        }
 
-            currentBoard = tab.dataset.board;
 
-            if (cachedBoards[currentBoard].length) {
-                renderBoard();
+        // ==========================================
+        // SWITCH LEADERBOARD
+        // ==========================================
+
+        function changeBoard(board) {
+
+            if (isLoading) return;
+
+            currentBoard = board;
+
+            const scoreTab =
+                document.getElementById("score-tab");
+
+            const survivalTab =
+                document.getElementById("survival-tab");
+
+            const title =
+                document.getElementById("board-title");
+
+
+            scoreTab.classList.toggle(
+                "active",
+                board === "score"
+            );
+
+            survivalTab.classList.toggle(
+                "active",
+                board === "survival"
+            );
+
+
+            title.textContent =
+                board === "survival"
+                    ? "WAVE SURVIVAL"
+                    : "HIGHEST SCORE";
+
+
+            loadLeaderboard();
+
+        }
+
+
+        // ==========================================
+        // INITIAL LOAD AND AUTOMATIC REFRESH
+        // ==========================================
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            loadLeaderboard();
+
+            setInterval(() => {
+
                 loadLeaderboard();
-            } else {
-                loadLeaderboard();
-            }
+
+            }, 60000);
+
         });
-    });
 
-    refreshButton.addEventListener("click", () => {
-        loadLeaderboard(true);
-    });
-
-    // Initial load.
-    loadLeaderboard();
-
-    // Refresh the active leaderboard every 60 seconds.
-    setInterval(() => {
-        loadLeaderboard();
-    }, 60000);
-</script>
+    </script>
 
 </body>
 </html>
